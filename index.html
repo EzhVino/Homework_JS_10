@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pictures from Space</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+        }
+
+        .content {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+        }
+
+        .card {
+            border: 2px solid black;
+            padding: 30px;
+            font-family: Verdana, sans-serif;
+            width: 100%;
+            max-width: 500px;
+        }
+
+        .card__photo {
+            width: 300px;
+        }
+
+        .card__txt {
+            padding-top: 10px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div class="content"></div>
+
+    <script src="data.js"></script>
+    <script>
+        const contentEl = document.querySelector('.content');
+        const dataJS = JSON.parse(spacePics);
+
+        dataJS.forEach(element => {
+            const dataBlock = document.createElement('div');
+            dataBlock.classList.add('card');
+
+            const roverName = document.createElement('h2');
+            roverName.classList.add('card__rover-title');
+            roverName.textContent = element.rover.name;
+
+            const landingDate = document.createElement('h2');
+            landingDate.classList.add('card__date');
+            landingDate.textContent = element.rover.landing_date;
+
+            const planetPic = document.createElement('img');
+            planetPic.classList.add('card__photo');
+            planetPic.setAttribute('alt', 'picture invisible :(')
+            planetPic.src = element.img_src;
+
+            const camera = document.createElement('p');
+            camera.classList.add('card__txt');
+            camera.textContent = `Photo taken by ${element.camera.full_name} on Mars`;
+
+            contentEl.appendChild(dataBlock);
+
+            dataBlock.appendChild(roverName);
+            dataBlock.appendChild(landingDate);
+            dataBlock.appendChild(planetPic);
+            dataBlock.appendChild(camera);
+        });
+
+
+
+
+    </script>
+</body>
+
+</html>
